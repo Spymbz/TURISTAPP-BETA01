@@ -51,12 +51,12 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
     }
 
     public static class CategoryViewHolder extends RecyclerView.ViewHolder {
-        ImageView ivCategoryBackground; // <-- CAMBIO AQUÍ
+        ImageView ivCategoryBackground;
         TextView tvCategoryName;
 
         public CategoryViewHolder(@NonNull View itemView) {
             super(itemView);
-            ivCategoryBackground = itemView.findViewById(R.id.iv_category_background); // <-- CAMBIO AQUÍ
+            ivCategoryBackground = itemView.findViewById(R.id.iv_category_background);
             tvCategoryName = itemView.findViewById(R.id.tv_category_name);
         }
     }

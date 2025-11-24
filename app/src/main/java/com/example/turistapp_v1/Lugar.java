@@ -1,93 +1,34 @@
 package com.example.turistapp_v1;
 
-import com.google.firebase.firestore.Exclude;
-import com.google.firebase.firestore.ServerTimestamp;
-import com.google.firebase.Timestamp;
+import com.google.firebase.database.Exclude;
+import com.google.firebase.database.IgnoreExtraProperties;
+import com.google.firebase.database.PropertyName;
 
-import java.util.Date;
-
+// Esta anotación hace que la app ignore cualquier campo extra en la base de datos que no esté definido aquí.
+// Esto evita que la app se cierre si en el futuro se añaden nuevos campos a la base de datos.
+@IgnoreExtraProperties
 public class Lugar {
+
+    // Se inicializan los campos con valores por defecto. Si Firebase no encuentra un valor para un campo,
+    // usará este valor en lugar de "null", lo que previene muchos cierres inesperados (crashes).
     private String id;
-    private String nombre;
-    private String descripcion;
-    private String urlImagen;
-    private String region;
-    private String categoria;
-    private double latitud;
-    private double longitud;
-    private String direccion;
-    private String creadorId;
-
-    @ServerTimestamp
-    private Timestamp fechaCreacionTimestamp; // Para Firestore - este es el campo que Firestore usa
-
-    // --- NUEVOS CAMPOS PARA EL RATING ---
-    private double ratingPromedio;
-    private int cantidadRatings;
-    // ------------------------------------
+    private String nombre = "";
+    private String descripcion = "";
+    private String urlImagen = "";
+    private String region = "";
+    private String categoria = "";
+    private Double latitud = 0.0;
+    private Double longitud = 0.0;
+    private String direccion = "";
+    private String creadoPorAdminId = "";
+    private Long fechaCreacion = 0L;
+    private Integer costoAproximado = 0;
+    private String horario = "";
 
     public Lugar() {
-        // Constructor vacío requerido por Firestore
-    }
-
-    public Lugar(String nombre, String descripcion, String urlImagen, String region, String categoria, double latitud, double longitud, String direccion, String creadorId) {
-        this.nombre = nombre;
-        this.descripcion = descripcion;
-        this.urlImagen = urlImagen;
-        this.region = region;
-        this.categoria = categoria;
-        this.latitud = latitud;
-        this.longitud = longitud;
-        this.direccion = direccion;
-        this.creadorId = creadorId;
-        this.ratingPromedio = 0.0;
-        this.cantidadRatings = 0;
     }
 
     @Exclude
-    public long getFechaCreacion() {
-        if (fechaCreacionTimestamp != null) {
-            return fechaCreacionTimestamp.getSeconds() * 1000 + fechaCreacionTimestamp.getNanoseconds() / 1000000;
-        }
-        return 0;
-    }
-
-    @Exclude
-    public void setFechaCreacion(long fechaCreacion) {
-        // Convertir long a Timestamp si es necesario
-        if (fechaCreacion > 0) {
-            this.fechaCreacionTimestamp = new Timestamp(new Date(fechaCreacion));
-        }
-    }
-
-    public Timestamp getFechaCreacionTimestamp() {
-        return fechaCreacionTimestamp;
-    }
-
-    public void setFechaCreacionTimestamp(Timestamp fechaCreacionTimestamp) {
-        this.fechaCreacionTimestamp = fechaCreacionTimestamp;
-    }
-
-    // ... (resto de getters y setters existentes)
-
-    // --- NUEVOS GETTERS Y SETTERS PARA EL RATING ---
-    public double getRatingPromedio() {
-        return ratingPromedio;
-    }
-
-    public void setRatingPromedio(double ratingPromedio) {
-        this.ratingPromedio = ratingPromedio;
-    }
-
-    public int getCantidadRatings() {
-        return cantidadRatings;
-    }
-
-    public void setCantidadRatings(int cantidadRatings) {
-        this.cantidadRatings = cantidadRatings;
-    }
-    // ------------------------------------------------
-
     public String getId() {
         return id;
     }
@@ -96,75 +37,123 @@ public class Lugar {
         this.id = id;
     }
 
+    @PropertyName("nombre")
     public String getNombre() {
         return nombre;
     }
 
+    @PropertyName("nombre")
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
 
+    @PropertyName("descripcion")
     public String getDescripcion() {
         return descripcion;
     }
 
+    @PropertyName("descripcion")
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
 
+    @PropertyName("urlImagen")
     public String getUrlImagen() {
         return urlImagen;
     }
 
+    @PropertyName("urlImagen")
     public void setUrlImagen(String urlImagen) {
         this.urlImagen = urlImagen;
     }
 
+    @PropertyName("region")
     public String getRegion() {
         return region;
     }
 
+    @PropertyName("region")
     public void setRegion(String region) {
         this.region = region;
     }
 
+    @PropertyName("categoria")
     public String getCategoria() {
         return categoria;
     }
 
+    @PropertyName("categoria")
     public void setCategoria(String categoria) {
         this.categoria = categoria;
     }
 
-    public double getLatitud() {
+    @PropertyName("latitud")
+    public Double getLatitud() {
         return latitud;
     }
 
-    public void setLatitud(double latitud) {
+    @PropertyName("latitud")
+    public void setLatitud(Double latitud) {
         this.latitud = latitud;
     }
 
-    public double getLongitud() {
+    @PropertyName("longitud")
+    public Double getLongitud() {
         return longitud;
     }
 
-    public void setLongitud(double longitud) {
+    @PropertyName("longitud")
+    public void setLongitud(Double longitud) {
         this.longitud = longitud;
     }
 
+    @PropertyName("direccion")
     public String getDireccion() {
         return direccion;
     }
 
+    @PropertyName("direccion")
     public void setDireccion(String direccion) {
         this.direccion = direccion;
     }
 
-    public String getCreadorId() {
-        return creadorId;
+    @PropertyName("creadoPorAdminId")
+    public String getCreadoPorAdminId() {
+        return creadoPorAdminId;
     }
 
-    public void setCreadorId(String creadorId) {
-        this.creadorId = creadorId;
+    @PropertyName("creadoPorAdminId")
+    public void setCreadoPorAdminId(String creadoPorAdminId) {
+        this.creadoPorAdminId = creadoPorAdminId;
+    }
+
+    @PropertyName("fechaCreacion")
+    public Long getFechaCreacion() {
+        return fechaCreacion;
+    }
+
+    @PropertyName("fechaCreacion")
+    public void setFechaCreacion(Long fechaCreacion) {
+        this.fechaCreacion = fechaCreacion;
+    }
+
+    @PropertyName("costoAproximado")
+    public Integer getCostoAproximado() {
+        return costoAproximado;
+    }
+
+    @PropertyName("costoAproximado")
+    public void setCostoAproximado(Integer costoAproximado) {
+        this.costoAproximado = costoAproximado;
+    }
+
+    @PropertyName("horario")
+    public String getHorario() {
+        return horario;
+    }
+
+    @PropertyName("horario")
+    public void setHorario(String horario) {
+        this.horario = horario;
     }
 }

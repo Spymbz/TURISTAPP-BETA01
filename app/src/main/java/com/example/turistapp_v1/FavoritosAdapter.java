@@ -1,63 +1,26 @@
 package com.example.turistapp_v1;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.bumptech.glide.Glide;
-import com.firebase.ui.database.FirebaseRecyclerAdapter;
-import com.firebase.ui.database.FirebaseRecyclerOptions;
+import java.util.List;
 
-public class LugarAdapter extends FirebaseRecyclerAdapter<Lugar, LugarAdapter.LugarViewHolder> {
+// Adaptador para una lista local de lugares, no depende de Firebase.
+public class FavoritosAdapter extends RecyclerView.Adapter<FavoritosAdapter.LugarViewHolder> {
 
+    private List<Lugar> lugares;
     private OnLugarClickListener listener;
 
-    public LugarAdapter(@NonNull FirebaseRecyclerOptions<Lugar> options) {
-        super(options);
-    }
-
-    @Override
-    protected void onBindViewHolder(@NonNull LugarViewHolder holder, int position, @NonNull Lugar model) {
-        holder.tvNombre.setText(model.getNombre());
-        holder.tvDescripcion.setText(model.getDireccion());
-
-        if (model.getUrlImagen() != null && !model.getUrlImagen().isEmpty()) {
-            Glide.with(holder.itemView.getContext())
-                    .load(model.getUrlImagen())
-                    .placeholder(R.drawable.placeholder_image)
-                    .error(R.drawable.error_image)
-                    .into(holder.ivImagen);
-        } else {
-            holder.ivImagen.setImageResource(R.drawable.placeholder_image);
-        }
-
-        final String lugarId = getRef(position).getKey();
-        model.setId(lugarId); // <- THE FIX
-
-        if (listener != null && lugarId != null) {
-            boolean isFav = listener.isLugarFavorite(lugarId);
-            updateFavoriteIcon(holder.btnFavorite, isFav);
-        } else {
-            updateFavoriteIcon(holder.btnFavorite, false);
-        }
-
-        holder.btnFavorite.setOnClickListener(v -> {
-            if (listener != null && lugarId != null) {
-                listener.onFavoriteClick(lugarId, model);
-            }
-        });
-
-        holder.itemView.setOnClickListener(v -> {
-            if (listener != null && lugarId != null) {
-                listener.onLugarClick(lugarId, model);
-            }
-        });
+    public FavoritosAdapter(List<Lugar> lugares, OnLugarClickListener listener) {
+        this.lugares = lugares;
+        this.listener = listener;
     }
 
     @NonNull
@@ -65,6 +28,58 @@ public class LugarAdapter extends FirebaseRecyclerAdapter<Lugar, LugarAdapter.Lu
     public LugarViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_lugar, parent, false);
         return new LugarViewHolder(view);
+    }
+
+    @Override
+    public void onBindViewHolder(@NonNull LugarViewHolder holder, int position) {
+        Lugar lugar = lugares.get(position);
+
+        holder.tvNombre.setText(lugar.getNombre());
+        holder.tvDescripcion.setText(lugar.getDireccion());
+
+        if (lugar.getUrlImagen() != null && !lugar.getUrlImagen().isEmpty()) {
+            Glide.with(holder.itemView.getContext())
+                    .load(lugar.getUrlImagen())
+                    .placeholder(R.drawable.placeholder_image)
+                    .error(R.drawable.error_image)
+                    .into(holder.ivImagen);
+        } else {
+            holder.ivImagen.setImageResource(R.drawable.placeholder_image);
+        }
+
+        String lugarId = lugar.getId();
+
+        updateFavoriteIcon(holder.btnFavorite, true);
+
+        holder.btnFavorite.setOnClickListener(v -> {
+            if (listener != null && lugarId != null) {
+                listener.onFavoriteClick(lugarId, lugar, holder.getAdapterPosition());
+            }
+        });
+
+        holder.itemView.setOnClickListener(v -> {
+            if (listener != null && lugarId != null) {
+                listener.onLugarClick(lugarId, lugar);
+            }
+        });
+    }
+
+    @Override
+    public int getItemCount() {
+        return lugares == null ? 0 : lugares.size();
+    }
+
+    public void setLugares(List<Lugar> nuevosLugares) {
+        this.lugares = nuevosLugares;
+        notifyDataSetChanged();
+    }
+    
+    public void removerLugar(int position) {
+        if (lugares != null && position >= 0 && position < lugares.size()) {
+            lugares.remove(position);
+            notifyItemRemoved(position);
+            notifyItemRangeChanged(position, lugares.size());
+        }
     }
 
     class LugarViewHolder extends RecyclerView.ViewHolder {
@@ -82,14 +97,10 @@ public class LugarAdapter extends FirebaseRecyclerAdapter<Lugar, LugarAdapter.Lu
         }
     }
 
+    // Interfaz de listener modificada para incluir la posición en el clic de favorito
     public interface OnLugarClickListener {
         void onLugarClick(String lugarId, Lugar lugar);
-        void onFavoriteClick(String lugarId, Lugar lugar);
-        boolean isLugarFavorite(String lugarId);
-    }
-
-    public void setOnLugarClickListener(OnLugarClickListener listener) {
-        this.listener = listener;
+        void onFavoriteClick(String lugarId, Lugar lugar, int position);
     }
 
     public static void updateFavoriteIcon(ImageButton button, boolean esFavorito) {

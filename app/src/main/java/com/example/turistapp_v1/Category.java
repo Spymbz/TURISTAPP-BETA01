@@ -2,10 +2,10 @@ package com.example.turistapp_v1;
 
 public class Category {
     private String name;
-    private int imageResId; // ID del recurso drawable (Ej: R.drawable.paris_category_bg)
+    private int imageResId;
 
     public Category() {
-        // Constructor vacío requerido para Firebase o deserialización
+        // Constructor vacío requerido por Firebase
     }
 
     public Category(String name, int imageResId) {

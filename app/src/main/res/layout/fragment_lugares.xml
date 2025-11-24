@@ -21,7 +21,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <LinearLayout
-        android:id="@+id/search_layout_lugares"
+        android:id="@+id/fake_search_bar_lugares"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -44,7 +44,6 @@
             android:contentDescription="Icono de búsqueda" />
 
         <TextView
-            android:id="@+id/tv_search_placeholder"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -52,15 +51,6 @@
             android:text="Descubrir un destino"
             android:textColor="#AAAAAA"
             android:textSize="16sp" />
-
-        <ImageButton
-            android:id="@+id/btn_filters_lugares"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:src="@drawable/ic_filters"
-            android:background="@drawable/rounded_blue_background"
-            app:tint="@android:color/white"
-            android:contentDescription="Filtros" />
 
     </LinearLayout>
 
@@ -71,9 +61,11 @@
         android:layout_marginTop="16dp"
         android:clipToPadding="false"
         android:paddingHorizontal="24dp"
+        android:paddingBottom="80dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/search_layout_lugares"
+        app:layout_constraintTop_toBottomOf="@+id/fake_search_bar_lugares"
         tools:listitem="@layout/item_lugar" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

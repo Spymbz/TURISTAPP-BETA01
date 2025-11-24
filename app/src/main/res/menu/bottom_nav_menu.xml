@@ -19,9 +19,5 @@
         android:id="@+id/navigation_favoritos"
         android:icon="@drawable/ic_favoritos"
         android:title="Favoritos" />
-    <item
-        android:id="@+id/navigation_cuenta"
-        android:icon="@drawable/ic_cuenta"
-        android:title="Cuenta" />
 
 </menu>

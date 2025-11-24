@@ -34,7 +34,7 @@
             android:layout_marginEnd="12dp"
             android:background="@drawable/circle_white_bg"
             android:src="@drawable/ic_favorite_border_24dp"
-            app:tint="@color/primary_color"
+            app:tint="@color/md_theme_light_primary"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             android:contentDescription="Añadir a favoritos" />
@@ -100,33 +100,6 @@
                     android:textStyle="bold"
                     tools:text="$240"
                     android:visibility="gone" tools:visibility="visible"/> </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/layout_item_rating"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:gravity="center_vertical"
-                    android:paddingHorizontal="10dp"
-                    android:paddingVertical="6dp"
-                    android:background="@drawable/rounded_purple_bg_with_star"> <ImageView
-                    android:layout_width="16dp"
-                    android:layout_height="16dp"
-                    android:src="@drawable/ic_star_24dp"
-                    app:tint="@android:color/white"
-                    android:contentDescription="Estrella de calificación" />
-
-                    <TextView
-                        android:id="@+id/item_lugar_rating_value"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="4dp"
-                        android:textColor="@android:color/white"
-                        android:textSize="14sp"
-                        android:textStyle="bold"
-                        tools:text="4.9" />
-
-                </LinearLayout>
 
             </LinearLayout>
 

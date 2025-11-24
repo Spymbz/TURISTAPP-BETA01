@@ -50,22 +50,24 @@
         android:id="@+id/scroll_view_detail"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintTop_toBottomOf="@id/top_bar_layout"
+        app:layout_constraintTop_toBottomOf="@+id/top_bar_layout"
         app:layout_constraintBottom_toTopOf="@+id/admin_buttons_layout">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:paddingBottom="24dp"> <TextView
-            android:id="@+id/tv_detail_welcome_to"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="8dp"
-            android:text="Bienvenido a"
-            android:textColor="#888888"
-            android:textSize="14sp" />
+            android:paddingBottom="24dp">
+
+            <TextView
+                android:id="@+id/tv_detail_welcome_to"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="8dp"
+                android:text="Bienvenido a"
+                android:textColor="#888888"
+                android:textSize="14sp" />
 
             <TextView
                 android:id="@+id/detail_lugar_nombre"
@@ -77,45 +79,6 @@
                 android:textColor="@android:color/black"
                 android:textSize="28sp"
                 android:textStyle="bold" />
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
-                android:layout_marginTop="8dp"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
-
-                <RatingBar
-                    android:id="@+id/detail_lugar_rating_bar"
-                    style="?android:attr/ratingBarStyleSmall"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:numStars="5"
-                    android:stepSize="0.1"
-                    android:isIndicator="true"
-                    android:theme="@style/RatingBarYellow" />
-
-                <TextView
-                    android:id="@+id/detail_lugar_rating_value"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="4dp"
-                    android:text="4.5"
-                    android:textColor="@android:color/black"
-                    android:textSize="14sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/detail_lugar_cantidad_ratings"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="4dp"
-                    android:text="(250 Reviews)"
-                    android:textColor="#888888"
-                    android:textSize="14sp" />
-
-            </LinearLayout>
 
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
@@ -195,103 +158,114 @@
                 android:lineSpacingExtra="4dp"/>
 
             <TextView
-                android:id="@+id/tv_map_placeholder"
-                android:layout_width="match_parent"
-                android:layout_height="180dp"
-                android:layout_marginHorizontal="24dp"
-                android:layout_marginTop="24dp"
-                android:background="#E0E0E0"
-                android:gravity="center"
-                android:text="Mapa del Lugar aquí"
-                android:textColor="#666666"
-                android:textSize="16sp"
-                android:textStyle="bold" />
-
-            <TextView
+                android:id="@+id/detail_lugar_horario_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"
                 android:layout_marginTop="24dp"
-                android:text="¿Qué te pareció este lugar?"
+                android:text="Horario"
                 android:textColor="@android:color/black"
                 android:textSize="18sp"
                 android:textStyle="bold" />
 
-            <RatingBar
-                android:id="@+id/rating_bar_user_vote"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
-                android:layout_marginTop="8dp"
-                android:numStars="5"
-                android:stepSize="1"
-                android:rating="0"
-                android:theme="@style/RatingBarYellow" />
-
-            <Button
-                android:id="@+id/btn_submit_rating"
+            <TextView
+                android:id="@+id/detail_lugar_horario"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="24dp"
-                android:layout_marginTop="16dp"
-                android:text="Enviar Calificación"
-                android:backgroundTint="?attr/colorPrimary"
-                android:textColor="@android:color/white"
-                android:paddingVertical="12dp"
+                android:layout_marginTop="8dp"
+                android:text="No especificado"
+                android:textColor="#888888"
                 android:textSize="16sp" />
 
             <TextView
-                android:id="@+id/tv_user_rating_info"
+                android:id="@+id/detail_lugar_costo_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="24dp"
+                android:text="Costo Aproximado"
+                android:textColor="@android:color/black"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/detail_lugar_costo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="24dp"
                 android:layout_marginTop="8dp"
-                android:textAlignment="center"
-                android:textSize="14sp"
-                android:textColor="#666666"
-                android:visibility="gone"
-                tools:text="Ya calificaste este lugar." />
+                android:text="No especificado"
+                android:textColor="#888888"
+                android:textSize="16sp" />
+            
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginHorizontal="24dp"
+                android:layout_marginTop="24dp">
 
-        </LinearLayout> </ScrollView> <LinearLayout
-    android:id="@+id/admin_buttons_layout"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="horizontal"
-    android:paddingHorizontal="24dp"
-    android:paddingTop="8dp"
-    android:paddingBottom="16dp"
-    android:gravity="center_horizontal"
-    android:background="#F9F9F9"
-    app:layout_constraintBottom_toBottomOf="parent"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintEnd_toEndOf="parent">
+                <com.google.android.gms.maps.MapView
+                    android:id="@+id/map_view_detail"
+                    android:layout_width="match_parent"
+                    android:layout_height="180dp"
+                    app:liteMode="true"
+                    app:mapType="normal" />
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btn_edit_lugar"
-        android:layout_width="0dp"
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_go_to_map"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Ver en el mapa"
+                    android:layout_marginTop="8dp"
+                    app:cornerRadius="16dp"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+    <LinearLayout
+        android:id="@+id/admin_buttons_layout"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:layout_marginEnd="8dp"
-        android:text="Editar Lugar"
-        android:padding="14dp"
-        app:cornerRadius="16dp"
-        app:backgroundTint="?attr/colorPrimary"
-        android:visibility="gone"
-        tools:visibility="visible" />
+        android:orientation="horizontal"
+        android:paddingHorizontal="24dp"
+        android:paddingTop="8dp"
+        android:paddingBottom="16dp"
+        android:gravity="center_horizontal"
+        android:background="#F9F9F9"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btn_delete_lugar"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:layout_marginStart="8dp"
-        android:text="Eliminar Lugar"
-        android:padding="14dp"
-        app:cornerRadius="16dp"
-        app:backgroundTint="#D32F2F"
-        android:visibility="gone"
-        tools:visibility="visible" />
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_edit_lugar"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginEnd="8dp"
+            android:text="Editar Lugar"
+            android:padding="14dp"
+            app:cornerRadius="16dp"
+            app:backgroundTint="?attr/colorPrimary"
+            android:visibility="gone"
+            tools:visibility="visible" />
 
-</LinearLayout>
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_delete_lugar"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginStart="8dp"
+            android:text="Eliminar Lugar"
+            android:padding="14dp"
+            app:cornerRadius="16dp"
+            app:backgroundTint="#D32F2F"
+            android:visibility="gone"
+            tools:visibility="visible" />
+
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
